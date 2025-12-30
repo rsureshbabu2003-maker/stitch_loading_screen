@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Zepto - Grocery Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7706f9",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#180f23",
+                        "text-main": "#141118",
+                        "text-sub": "#745f8c",
+                        "border-color": "#e0dbe6"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main antialiased overflow-x-hidden">
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 z-50 w-full bg-white border-b border-border-color shadow-sm">
+        <div class="max-w-[1280px] mx-auto px-4 lg:px-10 h-[72px] flex items-center justify-between gap-4">
+            <!-- Left: Logo & Location -->
+            <div class="flex items-center gap-6">
+                <!-- Logo -->
+                <a class="flex items-center gap-2 group" href="index.html">
+                    <div class="size-8 text-primary">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h1
+                        class="text-2xl font-extrabold tracking-tight text-[#141118] group-hover:text-primary transition-colors">
+                        Zepto</h1>
+                </a>
+                <!-- Location Divider -->
+                <div class="h-6 w-px bg-gray-300 hidden md:block"></div>
+                <!-- Location Selector -->
+                <a href="location.html"
+                    class="hidden md:flex flex-col justify-center cursor-pointer hover:bg-gray-50 px-2 py-1 rounded-lg transition-colors">
+                    <span class="text-[10px] font-bold text-text-main uppercase tracking-wider">Delivery to</span>
+                    <div class="flex items-center gap-1">
+                        <span class="text-sm font-bold text-text-main truncate max-w-[150px]">Dindigul, Tamil
+                            Nadu</span>
+                        <span class="material-symbols-outlined text-primary text-lg">expand_more</span>
+                    </div>
+                </a>
+            </div>
+            <!-- Center: Search Bar -->
+            <div class="flex-1 max-w-2xl px-4 hidden sm:block">
+                <div class="relative w-full group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="material-symbols-outlined text-text-sub">search</span>
+                    </div>
+                    <input
+                        class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg leading-5 bg-[#f2f0f5] text-text-main placeholder-text-sub focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all duration-200 sm:text-sm shadow-inner"
+                        placeholder="Search for 'milk', 'chips', 'bread'..." type="text"
+                        onkeypress="if(event.key === 'Enter') window.location.href='products.html?search=' + encodeURIComponent(this.value)" />
+                </div>
+            </div>
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3">
+                <a href="login.html"
+                    class="hidden lg:flex items-center justify-center font-bold text-sm text-text-main hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                    Login
+                </a>
+                <a href="cart.html"
+                    class="relative flex items-center justify-center bg-primary text-white hover:bg-primary/90 rounded-lg h-10 px-4 gap-2 transition-all active:scale-95 shadow-md shadow-primary/20">
+                    <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                    <span class="text-sm font-bold">My Cart</span>
+                    <!-- Cart Badge Logic will be inserted via JS -->
+                </a>
+            </div>
+        </div>
+        <!-- Mobile Search Bar (Visible only on small screens) -->
+        <div class="sm:hidden px-4 pb-3">
+            <div class="relative w-full">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="material-symbols-outlined text-text-sub text-lg">search</span>
+                </div>
+                <input
+                    class="block w-full pl-9 pr-3 py-2 border-none rounded-lg leading-5 bg-[#f2f0f5] text-text-main placeholder-text-sub focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
+                    placeholder="Search for products..." type="text"
+                    onkeypress="if(event.key === 'Enter') window.location.href='products.html?search=' + encodeURIComponent(this.value)" />
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="w-full flex flex-col items-center">
+        <div class="max-w-[1280px] w-full px-4 lg:px-10 py-6 flex flex-col gap-8">
+            <!-- Hero Carousel -->
+            <section class="w-full overflow-hidden rounded-xl">
+                <div
+                    class="flex gap-4 overflow-x-auto snap-x snap-mandatory [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden pb-4">
+                    <!-- Banner 1 -->
+                    <a href="products.html?category=vegetables"
+                        class="snap-center shrink-0 w-[85%] md:w-[60%] lg:w-[45%] h-48 md:h-64 rounded-2xl relative overflow-hidden group cursor-pointer shadow-md block">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-[#141118]/80 to-transparent z-10 flex flex-col justify-center p-8">
+                            <span
+                                class="bg-yellow-400 text-[#141118] text-xs font-bold px-2 py-1 rounded w-fit mb-2">FREE
+                                DELIVERY</span>
+                            <h2 class="text-white text-2xl md:text-4xl font-extrabold mb-1">Fresh Vegetables</h2>
+                            <p class="text-white/80 text-sm md:text-base font-medium mb-4">Farm fresh at your doorstep
+                                in 10 mins.</p>
+                            <span
+                                class="bg-white text-primary text-sm font-bold px-4 py-2 rounded-lg w-fit hover:bg-gray-100 transition-colors">Shop
+                                Now</span>
+                        </div>
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                            data-alt="Fresh green vegetables banner background"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXGDjHZQRcxnAGiIjiiupYKh_0lD2LGx-oGAku_nxyYU1VZO9iArb7psmmHGBnbrml7ziviSHSPuaCgKpuJo4eBIoaai5uknKYtffszlV_sZStOaHOwvifCXCDaYGbJUhcA_q8m-lemHC3LmFyLVmZrzTDjJ4K-hoRtj-gE9fvPn5EcdjIipwpTyP-Mz2-QgwE-l9Mnrs9y98qZ0SBCYz5RgK0-2l4Lhv9rVUGmtT582nRJLkqSodf7hMatOoINJn5XWofqwhD3aI8');">
+                        </div>
+                    </a>
+                    <!-- Banner 2 -->
+                    <a href="products.html?category=cold-drinks"
+                        class="snap-center shrink-0 w-[85%] md:w-[60%] lg:w-[45%] h-48 md:h-64 rounded-2xl relative overflow-hidden group cursor-pointer shadow-md block">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/30 z-10 flex flex-col justify-center p-8">
+                            <span
+                                class="bg-white/20 text-white text-xs font-bold px-2 py-1 rounded w-fit mb-2 backdrop-blur-sm">NEW
+                                ARRIVALS</span>
+                            <h2 class="text-white text-2xl md:text-4xl font-extrabold mb-1">Summer Drinks</h2>
+                            <p class="text-white/90 text-sm md:text-base font-medium mb-4">Cool down with our new
+                                collection.</p>
+                            <span
+                                class="bg-white text-primary text-sm font-bold px-4 py-2 rounded-lg w-fit hover:bg-gray-100 transition-colors">Explore</span>
+                        </div>
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                            data-alt="Refreshing summer drinks banner background"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDYOhP_5etjvZShrap3yBh1BhswilUB5i4LEAMxm8K95OY7yqbP31S8r2awOhxJRLgH1GM5ABA9NqAK1euQmmf5Pa7Su3kr_foC1BYSa3mz8yZIf3aX3QXUo7JVuIxVvA0DMFQJSvINC-YbZHqYc37q0xJS7TE-qoolw4dJB1UFHyj7NYT73Kb527G2DOug7JWbWBC_D6SypN3QhrK8BCsD8h2yhuy3zhuRHl7B_2NkAxEjXTYNFdT28apfRwGtwf6vFkUvM3qrq66h');">
+                        </div>
+                    </a>
+                    <!-- Banner 3 -->
+                    <a href="products.html?category=snacks"
+                        class="snap-center shrink-0 w-[85%] md:w-[60%] lg:w-[45%] h-48 md:h-64 rounded-2xl relative overflow-hidden group cursor-pointer shadow-md block">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-pink-600/90 to-pink-500/30 z-10 flex flex-col justify-center p-8">
+                            <h2 class="text-white text-2xl md:text-4xl font-extrabold mb-1">Munchies Mania</h2>
+                            <p class="text-white/90 text-sm md:text-base font-medium mb-4">Up to 50% OFF on snacks.</p>
+                            <span
+                                class="bg-white text-pink-600 text-sm font-bold px-4 py-2 rounded-lg w-fit hover:bg-gray-100 transition-colors">Grab
+                                Deal</span>
+                        </div>
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                            data-alt="Chips and snacks banner background"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCApj8PBW6ivb7Oo2FtZJStautZrUkpEk0IC4rEB03QxdKe5FuOJJjSOAxwpCHpAB9yfdo_syDlNelrZnMz2GP0hoIcDUUviTXABMb8wkNWWugdinKqsw_JlLsRFmp4BkNxrvPzKBm16BdkfQNnRbnrCdOYduQO6AMOhKPJg2X6IRgaWHbJazQk0pkLw8QQGQn_kOo94iqTJD7y3l84fO4EvjjtyY66DhCFSdO1unnoCtsHTdHIEavcxPOUOfGeX1xgXdQuE_Uafb8c');">
+                        </div>
+                    </a>
+                </div>
+            </section>
+            <!-- Categories Section -->
+            <section>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-text-main">Shop by Category</h3>
+                    <a class="text-primary text-sm font-bold hover:underline" href="products.html">See all</a>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                    <!-- Category Item: Fruits -->
+                    <a href="products.html?category=fruits"
+                        class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+                        <div
+                            class="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center overflow-hidden mb-1">
+                            <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform"
+                                data-alt="Fresh fruits icon"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD9rkb8Ig0p06uz8Qd-B4N5YZieaV0Mzd7omKaKdQVaOVTGD680OV09GvF3d0MDfyvGXZtin0IUe5iHN3Gv_qQ2qjE2-qQPnd8mzmBVTEZ4h5ry9ftL13KMyKNeWIgJKuTMcfX1yAHcdYXsbgJYIq1lxhY5fFU_bWla9zc2sVsiB1TH2ktSVeFsGKStmlgLW-en32lDWXc-BCmMfDgh34mGsgjGcKEWXirdyEJoS6I_a2mgwqWzE_9Mr7-q739i4cXY1Td02ufzGxCU');">
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-bold text-text-main text-center">Fruits</h4>
+                    </a>
+                    <!-- Category Item: Vegetables -->
+                    <a href="products.html?category=vegetables"
+                        class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+                        <div
+                            class="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center overflow-hidden mb-1">
+                            <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform"
+                                data-alt="Fresh vegetables icon"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWO_zq7j4_Pl4qneS1qfDSkohZ7SlaULmE-8J9skXknvlZ8XMpwZMKC9bHOPszayFboQDHp0hb-odpsbbnV7zsbUXhx_fV91ljZtX696HDpa1NzDWEh804XANdWYPuOdbormkCNOIn5P9lYCwQK7Yych3pu8uPqLjYTt-V2rEDdbeneg0dmeZS-qMvwxqtR2oPndQZWzqGbmC3E2fkK4H8iJkTZ6u3EL6N_JzoFt2skYmKehnbJoq5NQBvSMHXJH1zxJUsNXRI_DJC');">
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-bold text-text-main text-center">Vegetables</h4>
+                    </a>
+                    <!-- Category Item: Snacks -->
+                    <a href="products.html?category=snacks"
+                        class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+                        <div
+                            class="w-16 h-16 rounded-full bg-yellow-50 flex items-center justify-center overflow-hidden mb-1">
+                            <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform"
+                                data-alt="Packaged snacks icon"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCUOY0qllNgTbK_NMDssJ6SwQbvsUhvGShBFh5emmVL5PRDspDOmKhkag2A_U4-oCgiEENbGbmzuSsln2ORlC6AMDIzmWp9byC99TwTP4GjpUzFxjg8Kn_8sxqWxcbORYAF53cDN9DhPpC8-bMkaxlgp_lv-HIjzi2xldObW38EnStN48774LgGejF9tYyZSrrHtkAPxbSQg_-dzYcZmgQCoo6i9Z67_UmH9_SiSdVt9S6TipZZdUy4XrjWPdo0rr32DpvibxOcQryN');">
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-bold text-text-main text-center">Snacks</h4>
+                    </a>
+                    <!-- Category Item: Dairy -->
+                    <a href="products.html?category=dairy-bread"
+                        class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+                        <div
+                            class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center overflow-hidden mb-1">
+                            <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform"
+                                data-alt="Milk and dairy products icon"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAkpvWIIegNpqc6yvMzNkvnQL733GLRoRxJErybCFStUc4_j7GWwXmRPLm3h_kFxw41ongqFTndflGK77-LGtHYlBpNQjRB4k1gfP9p8D4bi2POz6mXFB-ezYIfY1ZdogYhkbPyjM9EuGN4fYOA7BRJZn9hODY1wsC6lqu5Qcz7sJN3KvUIZfricmNr14eafC3p6ihkgXVHF3WFs-yfea-4JxigCJqzNMddphoEdTXeegWiRsWAN7DoZ2nuMWahusYI1Pgkuswj8b-l');">
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-bold text-text-main text-center">Dairy</h4>
+                    </a>
+                    <!-- Category Item: Beverages -->
+                    <a href="products.html?category=cold-drinks"
+                        class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+                        <div
+                            class="w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center overflow-hidden mb-1">
+                            <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform"
+                                data-alt="Beverages and cold drinks icon"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADHAQncqbF1WCSKJIm9esenNlRfLM1LiXb67iibrVbhAYufMIe7dvcuH_1GHsPfP-Er14j6xT1AYpfCEqhVKBegHEWrNZtrn03EFcb0EpjwgW7PawvqvEdkb6GX6mviFqfPFU7UzVB3EP12OTrTCrgh3kDCQK7e-Ig7PL3Gt7z_RwjGyC-ecDxuAG-J9LHamDJlLBbLIPRZhqJlnkmECCi6dmHG25Ot77v2OfU8Q5zwx-ZxcU0uNINzXZbyozJQTcgX-8edgK9Vpvo');">
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-bold text-text-main text-center">Beverages</h4>
+                    </a>
+                    <!-- Category Item: Essentials -->
+                    <a href="products.html?category=cleaning-essentials"
+                        class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+                        <div
+                            class="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center overflow-hidden mb-1">
+                            <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform"
+                                data-alt="Home essentials products icon"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBK1wNC2zjWZZV9_w4hAMou02cDC3Im4YK7KiCAU0YPqxRPGvrmVqOMKJLn19qPk9iLICEEiAIDuyf_tYafWUrC97l9TkvQOEfdudrx1yW2_1LMZeesNZjczaa9vmZC1j5hJlMCP6G4HxSoO4XMKo-FMrhghF26hMtpG8cWhQHu3EDzEMnhzxRfHAXBZBkAO07Dj5MkHJz4td_b6BgfJZqvPVgb7os7n4Vu5U3cAErEgTe-4tOlKMCmTOhcvPWw6vKZ2f4FnmacZAkU');">
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-bold text-text-main text-center">Essentials</h4>
+                    </a>
+                </div>
+            </section>
+            <!-- Product Grid: Trending -->
+            <section class="pb-10">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-text-main">Trending in Dindigul</h3>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <!-- Product Card 1: Carrots -->
+                    <div
+                        class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+                        <div
+                            class="absolute top-0 left-0 bg-primary/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-br-lg rounded-tl-lg z-10 shadow-sm">
+                            FRESH
+                        </div>
+                        <div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+                            <div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300"
+                                style="background-image: url('https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&q=80');">
+                            </div>
+                        </div>
+                        <div class="flex flex-col flex-grow">
+                            <h3
+                                class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">
+                                Orange Carrots</h3>
+                            <p class="text-xs text-text-sub font-medium mb-3">500 g</p>
+                            <div class="mt-auto flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-text-main">₹45</span>
+                                </div>
+                                <button
+                                    onclick='Cart.add({ id: 5, name: "Orange Carrots", weight: "500 g", price: 45, image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&q=80" })'
+                                    class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Card 2: Milk -->
+                    <div
+                        class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+                        <div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+                            <div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300"
+                                style="background-image: url('https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&q=80');">
+                            </div>
+                        </div>
+                        <div class="flex flex-col flex-grow">
+                            <h3
+                                class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">
+                                Fresh Milk</h3>
+                            <p class="text-xs text-text-sub font-medium mb-3">500 ml</p>
+                            <div class="mt-auto flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-text-main">₹27</span>
+                                </div>
+                                <button
+                                    onclick='Cart.add({ id: 201, name: "Fresh Milk", weight: "500 ml", price: 27, image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&q=80" })'
+                                    class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Card 3: Chips -->
+                    <div
+                        class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+                        <div
+                            class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-br-lg rounded-tl-lg z-10 shadow-sm">
+                            POPULAR
+                        </div>
+                        <div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+                            <div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300"
+                                style="background-image: url('https://images.unsplash.com/photo-1566478988047-8c03bcacaa5a?w=400&q=80');">
+                            </div>
+                        </div>
+                        <div class="flex flex-col flex-grow">
+                            <h3
+                                class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">
+                                Potato Chips - Salted</h3>
+                            <p class="text-xs text-text-sub font-medium mb-3">50 g</p>
+                            <div class="mt-auto flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-text-main">₹20</span>
+                                </div>
+                                <button
+                                    onclick='Cart.add({ id: 401, name: "Potato Chips - Salted", weight: "50 g", price: 20, image: "https://images.unsplash.com/photo-1566478988047-8c03bcacaa5a?w=400&q=80" })'
+                                    class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Card 4: Bread -->
+                    <div
+                        class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+                        <div
+                            class="absolute top-0 left-0 bg-primary/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-br-lg rounded-tl-lg z-10 shadow-sm">
+                            10% OFF
+                        </div>
+                        <div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+                            <div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300"
+                                style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80');">
+                            </div>
+                        </div>
+                        <div class="flex flex-col flex-grow">
+                            <h3
+                                class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">
+                                Whole Wheat Bread</h3>
+                            <p class="text-xs text-text-sub font-medium mb-3">400 g</p>
+                            <div class="mt-auto flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <span class="text-[11px] text-gray-400 line-through">₹50</span>
+                                    <span class="text-sm font-bold text-text-main">₹45</span>
+                                </div>
+                                <button
+                                    onclick='Cart.add({ id: 202, name: "Whole Wheat Bread", weight: "400 g", price: 45, originalPrice: 50, image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80" })'
+                                    class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Card 5: Beverage -->
+                    <div
+                        class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+                        <div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+                            <div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300"
+                                style="background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&q=80');">
+                            </div>
+                        </div>
+                        <div class="flex flex-col flex-grow">
+                            <h3
+                                class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">
+                                Cola</h3>
+                            <p class="text-xs text-text-sub font-medium mb-3">300 ml</p>
+                            <div class="mt-auto flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-text-main">₹40</span>
+                                </div>
+                                <button
+                                    onclick='Cart.add({ id: 501, name: "Cola", weight: "300 ml", price: 40, image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&q=80" })'
+                                    class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- Simple Footer -->
+    <footer class="bg-white border-t border-border-color py-10 mt-auto">
+        <div class="max-w-[1280px] mx-auto px-4 lg:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h5 class="font-bold text-lg mb-4 text-[#141118]">Zepto</h5>
+                    <p class="text-text-sub text-sm leading-relaxed max-w-xs">High-quality groceries delivered to your
+                        doorstep in 10 minutes. Experience the future of shopping.</p>
+                </div>
+                <div>
+                    <h5 class="font-bold text-lg mb-4 text-[#141118]">Quick Links</h5>
+                    <ul class="flex flex-col gap-2 text-text-sub text-sm font-medium">
+                        <li><a class="hover:text-primary transition-colors" href="#">Home</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Delivery Areas</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Customer Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-lg mb-4 text-[#141118]">Follow Us</h5>
+                    <div class="flex gap-4">
+                        <div
+                            class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-text-sub hover:bg-primary hover:text-white transition-colors cursor-pointer">
+                            <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+                                <path clip-rule="evenodd"
+                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                    fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-text-sub hover:bg-primary hover:text-white transition-colors cursor-pointer">
+                            <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+                                <path clip-rule="evenodd"
+                                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772 4.902 4.902 0 011.772-1.153c.636-.247 1.363-.416 2.427-.465C9.673 2.013 10.03 2 12.484 2h.058zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm5.338-3.205a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4z"
+                                    fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-text-sub">
+                <p>© 2024 Zepto Clone. All rights reserved.</p>
+                <p>Designed with Tailwind CSS</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const Cart = {
+            get: () => JSON.parse(localStorage.getItem('stitch_cart')) || [],
+            set: (cart) => {
+                localStorage.setItem('stitch_cart', JSON.stringify(cart));
+            },
+            add: (product) => {
+                const cart = Cart.get();
+                const existing = cart.find(item => item.id === product.id);
+                if (existing) {
+                    existing.quantity += 1;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                Cart.set(cart);
+
+                // Toast
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-20 left-1/2 -translate-x-1/2 bg-black/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-50 animate-bounce transition-all';
+                toast.textContent = 'Added to Cart!';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2000);
+            }
+        };
+    </script>
+</body>
+
+</html>

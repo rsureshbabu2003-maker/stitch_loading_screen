@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Z-Mart - Login</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7706f9",
+                        "primary-dark": "#6004c9",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#180f23",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e142b",
+                        "text-main": "#141118",
+                        "text-muted": "#745f8c",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e0dbe6;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c0b8cc;
+        }
+
+        .otp-input:focus {
+            box-shadow: 0 0 0 2px rgba(119, 6, 249, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white">
+    <div class="flex min-h-screen w-full">
+        <!-- LEFT SIDE: Hero / Marketing (Hidden on mobile) -->
+        <div
+            class="hidden lg:flex lg:w-1/2 xl:w-7/12 flex-col justify-between bg-[#f3e8ff] dark:bg-[#2a1b3d] relative overflow-hidden p-12">
+            <!-- Branding -->
+            <a href="index.html" class="z-10 flex items-center gap-3 cursor-pointer">
+                <div class="flex items-center justify-center size-10 rounded-xl bg-primary text-white shadow-lg">
+                    <span class="material-symbols-outlined text-2xl">local_mall</span>
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight text-text-main dark:text-white">Z-Mart</h1>
+            </a>
+            <!-- Hero Content -->
+            <div class="z-10 max-w-xl mt-auto mb-12">
+                <h2 class="text-5xl font-extrabold leading-[1.1] tracking-tight text-[#2d0f59] dark:text-white mb-6">
+                    Groceries delivered in <span class="text-primary">10 minutes</span>
+                </h2>
+                <p class="text-xl font-medium text-[#5e4b75] dark:text-[#dcd1f0]">
+                    From fresh produce to daily essentials, get everything you need delivered to your doorstep lightning
+                    fast.
+                </p>
+            </div>
+            <!-- Abstract Background Shapes -->
+            <div
+                class="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-white/40 dark:bg-white/5 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <!-- Hero Image -->
+            <div class="absolute bottom-0 right-0 w-3/4 h-3/4 pointer-events-none translate-y-12 translate-x-12">
+                <div class="w-full h-full bg-center bg-contain bg-no-repeat"
+                    data-alt="Bag of fresh groceries and vegetables"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBbGFkFWSJ6aYWV4lafGEPkBNSdTnejn2rPq9CIEBAaKNMw4ml7_EiSxgqzN8rCX7DATuFzToruUfv4wskq4oAJqyn_mYe9vZ0mwtXKZZwULHrbWqWmeb_94K8WyrKiI-zIARfFIplncD5TVy41Ft3NJdSy9TBYeixfsfiP73s2JdE6YHaDq1nTmV9H2FQS9EAOp4SYF4p--4fuVuamYdV-D0VqlLEf-7T3E7oplh3Xv4VXsBYr7Q5gSaPwfykK3_2nwgZCE2PRyTFo');">
+                </div>
+            </div>
+        </div>
+        <!-- RIGHT SIDE: Login Form -->
+        <div
+            class="w-full lg:w-1/2 xl:w-5/12 flex flex-col bg-surface-light dark:bg-surface-dark shadow-2xl overflow-y-auto">
+            <!-- Mobile Header (Visible only on small screens) -->
+            <div class="lg:hidden flex items-center justify-between p-6 border-b border-gray-100 dark:border-white/5">
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                    <div class="flex items-center justify-center size-8 rounded-lg bg-primary text-white">
+                        <span class="material-symbols-outlined text-lg">local_mall</span>
+                    </div>
+                    <span class="font-bold text-lg dark:text-white">Z-Mart</span>
+                </a>
+            </div>
+            <div class="flex-1 flex flex-col justify-center px-6 sm:px-12 md:px-16 py-12 max-w-lg mx-auto w-full">
+                <!-- Main Login Card -->
+                <div class="mb-8">
+                    <div class="mb-8">
+                        <h3 class="text-3xl font-bold text-text-main dark:text-white mb-2">Get started</h3>
+                        <p class="text-text-muted dark:text-gray-400">Login or sign up to start ordering</p>
+                    </div>
+                    <!-- Step 1: Phone Number Input -->
+                    <div class="flex flex-col gap-6">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-semibold text-text-main dark:text-gray-200">Mobile Number</label>
+                            <div class="flex gap-3">
+                                <!-- Country Code -->
+                                <div class="relative w-24">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <span class="text-lg">🇮🇳</span>
+                                    </div>
+                                    <input
+                                        class="w-full h-12 sm:h-14 pl-10 pr-2 bg-background-light dark:bg-background-dark border border-gray-200 dark:border-white/10 rounded-xl text-text-main dark:text-white font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary cursor-default text-center"
+                                        readonly="" type="text" value="+91" />
+                                </div>
+                                <!-- Phone Input -->
+                                <div class="relative flex-1">
+                                    <input
+                                        class="w-full h-12 sm:h-14 px-4 bg-background-light dark:bg-background-dark border border-gray-200 dark:border-white/10 rounded-xl text-text-main dark:text-white font-medium placeholder:text-text-muted focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"
+                                        placeholder="Enter phone number" type="tel" />
+                                    <!-- Validation Icon (Optional) -->
+                                    <div
+                                        class="absolute inset-y-0 right-0 flex items-center pr-4 text-green-500 hidden">
+                                        <span class="material-symbols-outlined text-xl">check_circle</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="w-full h-12 sm:h-14 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-lg shadow-primary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2 group">
+                            <span>Continue</span>
+                            <span
+                                class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
+                        <div class="relative flex py-2 items-center">
+                            <div class="flex-grow border-t border-gray-100 dark:border-white/10"></div>
+                            <span
+                                class="flex-shrink-0 mx-4 text-xs font-medium text-text-muted uppercase tracking-wider">Or
+                                continue with</span>
+                            <div class="flex-grow border-t border-gray-100 dark:border-white/10"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button
+                                class="flex items-center justify-center gap-2 h-12 rounded-xl border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                                <img alt="Google Logo" class="w-5 h-5" data-alt="Google G Logo"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk_SVmp7tlukZFFSquJUagypzNuQCurfEB2-Dba16Mrxv4zfOPU4E0Nu4Sf9cdVqoqBlVKUt4o6ur-OA6nkI7ilQdh5A_ptH2GQfsqEJ9iE4o4uHN2hrhoIUMC0Bx10I_-8afxpBbipy0rf8xWmdMbNLi1i7LaHQEGydcrrwXxVGRJjQXkIalxdmLPlPaIa76E8LhyWEx-zD_2OtDSaHXodbGim_H53T7rUeb-R8SKi2bkKl4lBXfRy7WaezoWARcrWbk170yTd5U7" />
+                                <span class="text-sm font-semibold text-text-main dark:text-white">Google</span>
+                            </button>
+                            <button
+                                class="flex items-center justify-center gap-2 h-12 rounded-xl border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-[22px] text-black dark:text-white">mail</span>
+                                <span class="text-sm font-semibold text-text-main dark:text-white">Email</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- OTP UI Section (Showcased below for demonstration of the requested component) -->
+                <div class="mt-8 pt-8 border-t border-dashed border-gray-200 dark:border-white/10">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="material-symbols-outlined text-primary text-sm">info</span>
+                        <p class="text-xs font-semibold text-primary uppercase tracking-wider">OTP Verification State
+                            Preview</p>
+                    </div>
+                    <div
+                        class="bg-background-light dark:bg-background-dark/50 p-6 rounded-2xl border border-gray-100 dark:border-white/5">
+                        <div class="flex flex-col gap-1 mb-6">
+                            <h4 class="text-lg font-bold text-text-main dark:text-white">Enter verification code</h4>
+                            <p class="text-sm text-text-muted">We've sent a code to <span
+                                    class="font-semibold text-text-main dark:text-white">+91 98765 43210</span></p>
+                        </div>
+                        <!-- OTP Inputs -->
+                        <div class="flex justify-between gap-2 sm:gap-4 mb-6">
+                            <input
+                                class="otp-input w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold bg-white dark:bg-[#251a33] border border-primary text-text-main dark:text-white rounded-xl focus:border-primary focus:outline-none transition-all caret-primary"
+                                maxlength="1" type="text" value="5" />
+                            <input
+                                class="otp-input w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold bg-white dark:bg-[#251a33] border border-gray-200 dark:border-white/10 text-text-main dark:text-white rounded-xl focus:border-primary focus:outline-none transition-all caret-primary"
+                                maxlength="1" type="text" />
+                            <input
+                                class="otp-input w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold bg-white dark:bg-[#251a33] border border-gray-200 dark:border-white/10 text-text-main dark:text-white rounded-xl focus:border-primary focus:outline-none transition-all caret-primary"
+                                maxlength="1" type="text" />
+                            <input
+                                class="otp-input w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold bg-white dark:bg-[#251a33] border border-gray-200 dark:border-white/10 text-text-main dark:text-white rounded-xl focus:border-primary focus:outline-none transition-all caret-primary"
+                                maxlength="1" type="text" />
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-text-muted">00:30</span>
+                            <button class="text-sm font-bold text-gray-400 cursor-not-allowed" disabled="">Resend
+                                Code</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Terms -->
+                <p class="mt-12 text-center text-xs text-text-muted">
+                    By continuing, you agree to our
+                    <a class="font-semibold text-primary hover:underline" href="#">Terms of Service</a> &amp;
+                    <a class="font-semibold text-primary hover:underline" href="#">Privacy Policy</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

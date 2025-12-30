@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zepto - Grocery Delivery</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7706f9",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#180f23",
+                        "text-main": "#141118",
+                        "text-sub": "#745f8c",
+                        "border-color": "#e0dbe6"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main antialiased overflow-x-hidden">
+<nav class="sticky top-0 z-50 w-full bg-white border-b border-border-color shadow-sm">
+<div class="max-w-[1400px] mx-auto px-4 lg:px-6 xl:px-10 h-[80px] flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 lg:gap-8 shrink-0">
+<a class="flex items-center gap-2 group" href="#">
+<div class="size-9 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h1 class="text-3xl font-extrabold tracking-tight text-[#141118] group-hover:text-primary transition-colors">Zepto</h1>
+</a>
+<div class="h-8 w-px bg-gray-200 hidden md:block"></div>
+<div class="hidden md:flex flex-col justify-center cursor-pointer hover:bg-gray-50 px-3 py-1.5 rounded-xl transition-colors group/loc">
+<span class="text-[10px] font-bold text-text-main uppercase tracking-wider group-hover/loc:text-primary transition-colors">Delivery to</span>
+<div class="flex items-center gap-1">
+<span class="text-sm font-extrabold text-text-main truncate max-w-[160px]">Dindigul, Tamil Nadu</span>
+<span class="material-symbols-outlined text-text-main group-hover/loc:text-primary text-xl transition-colors">expand_more</span>
+</div>
+</div>
+</div>
+<div class="flex-1 max-w-3xl px-6 hidden lg:block">
+<div class="relative w-full group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-sub group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-3 border-none rounded-xl leading-5 bg-[#f2f0f5] text-text-main placeholder-text-sub focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all duration-200 text-sm shadow-inner" placeholder="Search for 'milk', 'chips', 'bread'..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3 xl:gap-6 shrink-0">
+<a class="hidden xl:flex flex-col items-center justify-center gap-1 text-text-sub hover:text-primary transition-colors group p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">category</span>
+<span class="text-xs font-bold">Products</span>
+</a>
+<a class="hidden xl:flex flex-col items-center justify-center gap-1 text-text-sub hover:text-primary transition-colors group p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">person</span>
+<span class="text-xs font-bold">Profile</span>
+</a>
+<button class="hidden md:flex items-center justify-center font-bold text-sm text-text-main hover:text-primary px-4 py-2.5 rounded-xl hover:bg-gray-100 transition-colors">
+                    Login
+                </button>
+<button class="relative flex items-center justify-center bg-primary text-white hover:bg-[#6405d4] rounded-xl h-11 px-5 gap-3 transition-all active:scale-95 shadow-lg shadow-primary/25">
+<span class="material-symbols-outlined text-[22px]">shopping_cart</span>
+<span class="text-sm font-bold">My Cart</span>
+<div class="absolute -top-2 -right-2 bg-[#ff3269] text-white text-[11px] font-bold w-6 h-6 flex items-center justify-center rounded-full border-[3px] border-white shadow-sm">2</div>
+</button>
+</div>
+</div>
+<div class="lg:hidden px-4 pb-4 border-t border-gray-100 pt-3">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-sub text-xl">search</span>
+</div>
+<input class="block w-full pl-10 pr-4 py-2.5 border-none rounded-xl leading-5 bg-[#f2f0f5] text-text-main placeholder-text-sub focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm" placeholder="Search for products..." type="text"/>
+</div>
+</div>
+</nav>
+<main class="w-full flex flex-col items-center">
+<div class="max-w-[1280px] w-full px-4 lg:px-10 py-6 flex flex-col gap-8">
+<section class="w-full overflow-hidden rounded-xl">
+<div class="flex gap-4 overflow-x-auto snap-x snap-mandatory [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden pb-4">
+<div class="snap-center shrink-0 w-[85%] md:w-[60%] lg:w-[45%] h-48 md:h-64 rounded-2xl relative overflow-hidden group cursor-pointer shadow-md">
+<div class="absolute inset-0 bg-gradient-to-r from-[#141118]/80 to-transparent z-10 flex flex-col justify-center p-8">
+<span class="bg-yellow-400 text-[#141118] text-xs font-bold px-2 py-1 rounded w-fit mb-2">FREE DELIVERY</span>
+<h2 class="text-white text-2xl md:text-4xl font-extrabold mb-1">Fresh Vegetables</h2>
+<p class="text-white/80 text-sm md:text-base font-medium mb-4">Farm fresh at your doorstep in 10 mins.</p>
+<button class="bg-white text-primary text-sm font-bold px-4 py-2 rounded-lg w-fit hover:bg-gray-100 transition-colors">Shop Now</button>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Fresh green vegetables banner background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXGDjHZQRcxnAGiIjiiupYKh_0lD2LGx-oGAku_nxyYU1VZO9iArb7psmmHGBnbrml7ziviSHSPuaCgKpuJo4eBIoaai5uknKYtffszlV_sZStOaHOwvifCXCDaYGbJUhcA_q8m-lemHC3LmFyLVmZrzTDjJ4K-hoRtj-gE9fvPn5EcdjIipwpTyP-Mz2-QgwE-l9Mnrs9y98qZ0SBCYz5RgK0-2l4Lhv9rVUGmtT582nRJLkqSodf7hMatOoINJn5XWofqwhD3aI8');"></div>
+</div>
+<div class="snap-center shrink-0 w-[85%] md:w-[60%] lg:w-[45%] h-48 md:h-64 rounded-2xl relative overflow-hidden group cursor-pointer shadow-md">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/30 z-10 flex flex-col justify-center p-8">
+<span class="bg-white/20 text-white text-xs font-bold px-2 py-1 rounded w-fit mb-2 backdrop-blur-sm">NEW ARRIVALS</span>
+<h2 class="text-white text-2xl md:text-4xl font-extrabold mb-1">Summer Drinks</h2>
+<p class="text-white/90 text-sm md:text-base font-medium mb-4">Cool down with our new collection.</p>
+<button class="bg-white text-primary text-sm font-bold px-4 py-2 rounded-lg w-fit hover:bg-gray-100 transition-colors">Explore</button>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Refreshing summer drinks banner background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDYOhP_5etjvZShrap3yBh1BhswilUB5i4LEAMxm8K95OY7yqbP31S8r2awOhxJRLgH1GM5ABA9NqAK1euQmmf5Pa7Su3kr_foC1BYSa3mz8yZIf3aX3QXUo7JVuIxVvA0DMFQJSvINC-YbZHqYc37q0xJS7TE-qoolw4dJB1UFHyj7NYT73Kb527G2DOug7JWbWBC_D6SypN3QhrK8BCsD8h2yhuy3zhuRHl7B_2NkAxEjXTYNFdT28apfRwGtwf6vFkUvM3qrq66h');"></div>
+</div>
+<div class="snap-center shrink-0 w-[85%] md:w-[60%] lg:w-[45%] h-48 md:h-64 rounded-2xl relative overflow-hidden group cursor-pointer shadow-md">
+<div class="absolute inset-0 bg-gradient-to-r from-pink-600/90 to-pink-500/30 z-10 flex flex-col justify-center p-8">
+<h2 class="text-white text-2xl md:text-4xl font-extrabold mb-1">Munchies Mania</h2>
+<p class="text-white/90 text-sm md:text-base font-medium mb-4">Up to 50% OFF on snacks.</p>
+<button class="bg-white text-pink-600 text-sm font-bold px-4 py-2 rounded-lg w-fit hover:bg-gray-100 transition-colors">Grab Deal</button>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Chips and snacks banner background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCApj8PBW6ivb7Oo2FtZJStautZrUkpEk0IC4rEB03QxdKe5FuOJJjSOAxwpCHpAB9yfdo_syDlNelrZnMz2GP0hoIcDUUviTXABMb8wkNWWugdinKqsw_JlLsRFmp4BkNxrvPzKBm16BdkfQNnRbnrCdOYduQO6AMOhKPJg2X6IRgaWHbJazQk0pkLw8QQGQn_kOo94iqTJD7y3l84fO4EvjjtyY66DhCFSdO1unnoCtsHTdHIEavcxPOUOfGeX1xgXdQuE_Uafb8c');"></div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-text-main">Shop by Category</h3>
+<a class="text-primary text-sm font-bold hover:underline" href="#">See all</a>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+<div class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center overflow-hidden mb-1">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform" data-alt="Fresh fruits icon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD9rkb8Ig0p06uz8Qd-B4N5YZieaV0Mzd7omKaKdQVaOVTGD680OV09GvF3d0MDfyvGXZtin0IUe5iHN3Gv_qQ2qjE2-qQPnd8mzmBVTEZ4h5ry9ftL13KMyKNeWIgJKuTMcfX1yAHcdYXsbgJYIq1lxhY5fFU_bWla9zc2sVsiB1TH2ktSVeFsGKStmlgLW-en32lDWXc-BCmMfDgh34mGsgjGcKEWXirdyEJoS6I_a2mgwqWzE_9Mr7-q739i4cXY1Td02ufzGxCU');"></div>
+</div>
+<h4 class="text-sm font-bold text-text-main text-center">Fruits</h4>
+</div>
+<div class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center overflow-hidden mb-1">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform" data-alt="Fresh vegetables icon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWO_zq7j4_Pl4qneS1qfDSkohZ7SlaULmE-8J9skXknvlZ8XMpwZMKC9bHOPszayFboQDHp0hb-odpsbbnV7zsbUXhx_fV91ljZtX696HDpa1NzDWEh804XANdWYPuOdbormkCNOIn5P9lYCwQK7Yych3pu8uPqLjYTt-V2rEDdbeneg0dmeZS-qMvwxqtR2oPndQZWzqGbmC3E2fkK4H8iJkTZ6u3EL6N_JzoFt2skYmKehnbJoq5NQBvSMHXJH1zxJUsNXRI_DJC');"></div>
+</div>
+<h4 class="text-sm font-bold text-text-main text-center">Vegetables</h4>
+</div>
+<div class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-yellow-50 flex items-center justify-center overflow-hidden mb-1">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform" data-alt="Packaged snacks icon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCUOY0qllNgTbK_NMDssJ6SwQbvsUhvGShBFh5emmVL5PRDspDOmKhkag2A_U4-oCgiEENbGbmzuSsln2ORlC6AMDIzmWp9byC99TwTP4GjpUzFxjg8Kn_8sxqWxcbORYAF53cDN9DhPpC8-bMkaxlgp_lv-HIjzi2xldObW38EnStN48774LgGejF9tYyZSrrHtkAPxbSQg_-dzYcZmgQCoo6i9Z67_UmH9_SiSdVt9S6TipZZdUy4XrjWPdo0rr32DpvibxOcQryN');"></div>
+</div>
+<h4 class="text-sm font-bold text-text-main text-center">Snacks</h4>
+</div>
+<div class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center overflow-hidden mb-1">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform" data-alt="Milk and dairy products icon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAkpvWIIegNpqc6yvMzNkvnQL733GLRoRxJErybCFStUc4_j7GWwXmRPLm3h_kFxw41ongqFTndflGK77-LGtHYlBpNQjRB4k1gfP9p8D4bi2POz6mXFB-ezYIfY1ZdogYhkbPyjM9EuGN4fYOA7BRJZn9hODY1wsC6lqu5Qcz7sJN3KvUIZfricmNr14eafC3p6ihkgXVHF3WFs-yfea-4JxigCJqzNMddphoEdTXeegWiRsWAN7DoZ2nuMWahusYI1Pgkuswj8b-l');"></div>
+</div>
+<h4 class="text-sm font-bold text-text-main text-center">Dairy</h4>
+</div>
+<div class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center overflow-hidden mb-1">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform" data-alt="Beverages and cold drinks icon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADHAQncqbF1WCSKJIm9esenNlRfLM1LiXb67iibrVbhAYufMIe7dvcuH_1GHsPfP-Er14j6xT1AYpfCEqhVKBegHEWrNZtrn03EFcb0EpjwgW7PawvqvEdkb6GX6mviFqfPFU7UzVB3EP12OTrTCrgh3kDCQK7e-Ig7PL3Gt7z_RwjGyC-ecDxuAG-J9LHamDJlLBbLIPRZhqJlnkmECCi6dmHG25Ot77v2OfU8Q5zwx-ZxcU0uNINzXZbyozJQTcgX-8edgK9Vpvo');"></div>
+</div>
+<h4 class="text-sm font-bold text-text-main text-center">Beverages</h4>
+</div>
+<div class="group flex flex-col items-center gap-3 p-4 rounded-xl border border-transparent hover:border-border-color bg-white hover:shadow-lg transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center overflow-hidden mb-1">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform" data-alt="Home essentials products icon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBK1wNC2zjWZZV9_w4hAMou02cDC3Im4YK7KiCAU0YPqxRPGvrmVqOMKJLn19qPk9iLICEEiAIDuyf_tYafWUrC97l9TkvQOEfdudrx1yW2_1LMZeesNZjczaa9vmZC1j5hJlMCP6G4HxSoO4XMKo-FMrhghF26hMtpG8cWhQHu3EDzEMnhzxRfHAXBZBkAO07Dj5MkHJz4td_b6BgfJZqvPVgb7os7n4Vu5U3cAErEgTe-4tOlKMCmTOhcvPWw6vKZ2f4FnmacZAkU');"></div>
+</div>
+<h4 class="text-sm font-bold text-text-main text-center">Essentials</h4>
+</div>
+</div>
+</section>
+<section class="pb-10">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-text-main">Trending in Dindigul</h3>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<div class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+<div class="absolute top-0 left-0 bg-primary/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-br-lg rounded-tl-lg z-10 shadow-sm">
+                            25% OFF
+                        </div>
+<div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+<div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300" data-alt="Orange carrots bunch" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgpLp5zy8qpQkcT8t8k5xccp9VJDzm_sS9eR_KAxAWjxQOMLz51UBYDDNk9vgrZ6hDxsVNY4KxqSRxg6wkp4b8ARj1VYU_agmuM3kTJmRjDq_RT5tVuOaC5bWrByLKEHAsLLdy_los1jW5yypkuwM82rHgL3bGl8VIG973AXPTPsSRgi8IFYCv0IFUhT2-N8dp2k9dSR2LSUcyFfUFKqfOmjNRtJ-DFUDV4VhpfSyzm1_S9-MFBCIOcfbJxRE56ymj-2MbrbMz5n6a');"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<h3 class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">Fresh Ooty Carrots</h3>
+<p class="text-xs text-text-sub font-medium mb-3">500 g</p>
+<div class="mt-auto flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-[11px] text-gray-400 line-through">₹60</span>
+<span class="text-sm font-bold text-text-main">₹45</span>
+</div>
+<button class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+<div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+<div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300" data-alt="Carton of fresh milk" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA6iCdQzbXSiaVpxPOfjDhaFfUIr_Ljo1CAHOMURgcsMKWawywqLbz2G68qWlWeuF8oALy3-qJEcJ9LBH_0QmwxTwyWXFRljoZxkqnddjUaFDnOLDAmLL9idrue2I5yEmrVGhdLwX6pYXWSz1cJiuqn77O1VWECeyRKpey-eP9oAkbf1oU6jFC3pkF98eBUhx7xhLJH5ufYr7c9sc6cM3cSqUrsRO2ynQf6cHIGZX7nDi3r6HTys9D7erWkOtHqlkdfkiWA9tNAyvsd');"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<h3 class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">Amul Taaza Milk</h3>
+<p class="text-xs text-text-sub font-medium mb-3">1 L</p>
+<div class="mt-auto flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-main">₹72</span>
+</div>
+<button class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+<div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-br-lg rounded-tl-lg z-10 shadow-sm">
+                            BUY 1 GET 1
+                        </div>
+<div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+<div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300" data-alt="Potato chips packet" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD8d-txQHzVki69J-Hz0gIJX0O1-Vt97jQGnZpDPCg8v6UC6uIjjwmZtuzp5rSjbziqEHjvQU1GVE1yXsqSQgNQ_54WX91asoBKTxSoEfNiLM8Z-wqoCXAVE0UCPccKljBw9ZbaIxBoUwmSVCAHzn0rr1gi8k1nAmSOrwfMMkvO8j0HpmHkLxo4b2VVPamPB9f_voVo2AEOezYSHhzAtegRbrcoCkqjmkV-a9Xn4vSOdez2K9K4lR4G_salAQOdtXhq0fka9_Ajdyme');"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<h3 class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">Lays Classic Salted</h3>
+<p class="text-xs text-text-sub font-medium mb-3">50 g</p>
+<div class="mt-auto flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-main">₹20</span>
+</div>
+<button class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+<div class="absolute top-0 left-0 bg-primary/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-br-lg rounded-tl-lg z-10 shadow-sm">
+                            10% OFF
+                        </div>
+<div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+<div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300" data-alt="Whole wheat bread loaf" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB1JhUAShgHp0j2SgAMRD58J19yGqV9_0vs9UsAZKAqUiC6iCD6Kua_jPsuAXRWLSDDdEGCskxDI5Gm-_32nfqYxIFR3HDJfvLgxOnbs1oIkG93Cjqt_tEVAgjhOnLMwKegmnxnM-zBSjE52lZm6Cv1ea_rfgFNEw2BUViXKml95M6siJrHK9nD89Kc0xP-sBLe4ufl9OzfhBGA-Tg9_clGN6Bk4TOk1pS9URFK9TsKtqs_R7b-X1OafDSot6yZYCjGd9Bu4xIgcVxC');"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<h3 class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">Modern Whole Wheat Bread</h3>
+<p class="text-xs text-text-sub font-medium mb-3">400 g</p>
+<div class="mt-auto flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-[11px] text-gray-400 line-through">₹55</span>
+<span class="text-sm font-bold text-text-main">₹50</span>
+</div>
+<button class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-white border border-border-color p-3 relative hover:shadow-lg transition-all duration-300 group">
+<div class="h-32 w-full flex items-center justify-center mb-3 mt-2 overflow-hidden rounded-lg">
+<div class="w-full h-full bg-contain bg-no-repeat bg-center group-hover:scale-105 transition-transform duration-300" data-alt="Instant coffee jar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDc63P_R_fouRoplMXp9e7iwLgcLg4bU7gVeZbc9mNHt04SEd1SKj-4sitWMl3mRGlQZtexnkt1kl3OSs7OXv4QjCchUhXQ2qcTEiIi8YMl8WOHJG5O-WLgaIiLM4RR2jZ5fQZmSR2ssB0wDhFfDWp8baMxoNSbuJ9SRNfXIrJDU_cvyCT-FgaGKzq4OYm-1Umhh3nEIPDNB-fw8jcn3xeygSZddhoOR6YTljRx0jFqrNDyYcNOfKmorbiR-myuZPrkAepo2kDTO-nf');"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<h3 class="font-bold text-[13px] md:text-sm text-text-main leading-tight line-clamp-2 h-10 mb-1">Nescafe Classic Coffee</h3>
+<p class="text-xs text-text-sub font-medium mb-3">50 g</p>
+<div class="mt-auto flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-main">₹190</span>
+</div>
+<button class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold px-4 py-1.5 rounded-lg uppercase transition-colors">Add</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer class="bg-white border-t border-border-color py-10 mt-auto">
+<div class="max-w-[1280px] mx-auto px-4 lg:px-10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+<div>
+<h5 class="font-bold text-lg mb-4 text-[#141118]">Zepto</h5>
+<p class="text-text-sub text-sm leading-relaxed max-w-xs">High-quality groceries delivered to your doorstep in 10 minutes. Experience the future of shopping.</p>
+</div>
+<div>
+<h5 class="font-bold text-lg mb-4 text-[#141118]">Quick Links</h5>
+<ul class="flex flex-col gap-2 text-text-sub text-sm font-medium">
+<li><a class="hover:text-primary transition-colors" href="#">Home</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Delivery Areas</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Customer Support</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-lg mb-4 text-[#141118]">Follow Us</h5>
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-text-sub hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path></svg>
+</div>
+<div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-text-sub hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772 4.902 4.902 0 011.772-1.153c.636-.247 1.363-.416 2.427-.465C9.673 2.013 10.03 2 12.484 2h.058zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm5.338-3.205a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4z" fill-rule="evenodd"></path></svg>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-text-sub">
+<p>© 2024 Zepto Clone. All rights reserved.</p>
+<p>Designed with Tailwind CSS</p>
+</div>
+</div>
+</footer>
+</body></html>

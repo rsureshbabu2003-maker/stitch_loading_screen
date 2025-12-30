@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zepto Clone - Product Listing</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7706f9",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#180f23",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-[#141118] dark:text-gray-100 min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 bg-white dark:bg-[#1e1a24] border-b border-[#f2f0f5] dark:border-gray-800 shadow-sm">
+<div class="px-4 md:px-10 py-3 flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 lg:gap-8 flex-1">
+<a class="flex items-center gap-3 shrink-0" href="#">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl">local_mall</span>
+</div>
+<h2 class="hidden md:block text-[#141118] dark:text-white text-2xl font-extrabold tracking-tight">Zepto</h2>
+</a>
+<div class="flex-1 max-w-xl hidden md:block">
+<div class="flex w-full items-center rounded-xl bg-[#f2f0f5] dark:bg-gray-800 h-11 px-4 transition-all focus-within:ring-2 focus-within:ring-primary/50">
+<span class="material-symbols-outlined text-[#745f8c] dark:text-gray-400">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-[#141118] dark:text-white placeholder-[#745f8c] dark:placeholder-gray-500 ml-3 text-sm font-medium" placeholder="Search for 'milk'"/>
+</div>
+</div>
+</div>
+<nav class="hidden lg:flex items-center gap-6 xl:gap-8">
+<a class="flex items-center gap-2 text-[#141118] dark:text-gray-200 text-sm font-bold hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">home</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-2 text-[#141118] dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">shopping_cart</span>
+<span>Cart</span>
+</a>
+<a class="flex items-center gap-2 text-[#141118] dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">person</span>
+<span>Profile</span>
+</a>
+<div class="h-6 w-px bg-gray-200 dark:bg-gray-700"></div>
+<button class="h-10 px-6 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-bold transition-colors shadow-lg shadow-primary/30 flex items-center gap-2">
+<span>Login</span>
+</button>
+</nav>
+<div class="flex items-center gap-4 lg:hidden">
+<button class="text-[#141118] dark:text-white">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-[#141118] dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 w-full max-w-[1440px] mx-auto flex items-start gap-6 px-4 md:px-8 py-6">
+<aside class="hidden lg:flex flex-col w-64 shrink-0 bg-white dark:bg-[#1e1a24] rounded-xl border border-[#f2f0f5] dark:border-gray-800 h-[calc(100vh-120px)] sticky top-24 overflow-y-auto no-scrollbar shadow-sm">
+<div class="p-4 border-b border-[#f2f0f5] dark:border-gray-800">
+<h1 class="text-[#141118] dark:text-white text-lg font-bold">Categories</h1>
+<p class="text-[#745f8c] dark:text-gray-400 text-xs mt-1">Select a category</p>
+</div>
+<nav class="flex flex-col gap-1 p-3">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-[#f3eefe] dark:bg-primary/20 text-primary border border-primary/10" href="#">
+<span class="material-symbols-outlined">nutrition</span>
+<span class="text-sm font-bold">Fresh Vegetables</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#f2f0f5] dark:hover:bg-gray-800 text-[#141118] dark:text-gray-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">category</span>
+<span class="text-sm font-medium">Fruits</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#f2f0f5] dark:hover:bg-gray-800 text-[#141118] dark:text-gray-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">eco</span>
+<span class="text-sm font-medium">Dairy &amp; Bread</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#f2f0f5] dark:hover:bg-gray-800 text-[#141118] dark:text-gray-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">rice_bowl</span>
+<span class="text-sm font-medium">Atta, Rice &amp; Dal</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#f2f0f5] dark:hover:bg-gray-800 text-[#141118] dark:text-gray-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">cookie</span>
+<span class="text-sm font-medium">Snacks &amp; Munchies</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#f2f0f5] dark:hover:bg-gray-800 text-[#141118] dark:text-gray-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">local_drink</span>
+<span class="text-sm font-medium">Cold Drinks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#f2f0f5] dark:hover:bg-gray-800 text-[#141118] dark:text-gray-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">cleaning_services</span>
+<span class="text-sm font-medium">Cleaning Essentials</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center gap-2 text-sm mb-4 text-[#745f8c] dark:text-gray-400">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Groceries</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-[#141118] dark:text-white font-medium">Fresh Vegetables</span>
+</div>
+<div class="mb-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+<h1 class="text-2xl md:text-[32px] font-bold text-[#141118] dark:text-white leading-tight">Fresh Vegetables <span class="text-lg font-medium text-gray-400 align-middle ml-2">(42)</span></h1>
+<div class="flex gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg border border-[#f2f0f5] bg-white dark:bg-[#1e1a24] dark:border-gray-700 pl-3 pr-2 hover:border-primary/50 transition-colors group">
+<span class="text-[#141118] dark:text-gray-200 text-xs font-bold">Sort: Relevance</span>
+<span class="material-symbols-outlined text-base text-gray-400 group-hover:text-primary">keyboard_arrow_down</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg border border-[#f2f0f5] bg-white dark:bg-[#1e1a24] dark:border-gray-700 pl-3 pr-2 hover:border-primary/50 transition-colors group">
+<span class="text-[#141118] dark:text-gray-200 text-xs font-bold">Price: Low to High</span>
+<span class="material-symbols-outlined text-base text-gray-400 group-hover:text-primary">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<div class="flex gap-2 overflow-x-auto no-scrollbar">
+<button class="whitespace-nowrap rounded-full bg-white dark:bg-[#1e1a24] border border-gray-200 dark:border-gray-700 px-4 py-1.5 text-xs font-bold text-[#141118] dark:text-gray-200 hover:bg-[#f2f0f5] dark:hover:bg-gray-800 transition-colors">
+                    In Stock
+                </button>
+<button class="whitespace-nowrap rounded-full bg-white dark:bg-[#1e1a24] border border-gray-200 dark:border-gray-700 px-4 py-1.5 text-xs font-bold text-[#141118] dark:text-gray-200 hover:bg-[#f2f0f5] dark:hover:bg-gray-800 transition-colors">
+                    Organic
+                </button>
+<button class="whitespace-nowrap rounded-full bg-white dark:bg-[#1e1a24] border border-gray-200 dark:border-gray-700 px-4 py-1.5 text-xs font-bold text-[#141118] dark:text-gray-200 hover:bg-[#f2f0f5] dark:hover:bg-gray-800 transition-colors">
+                    Discounted
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 pb-20">
+<div class="group flex flex-col justify-between rounded-xl bg-white dark:bg-[#1e1a24] border border-[#f2f0f5] dark:border-gray-800 p-3 hover:shadow-xl hover:border-primary/20 hover:-translate-y-1 transition-all duration-300">
+<div class="relative mb-3 h-32 md:h-40 w-full rounded-lg bg-[#f9f9f9] dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+<div class="absolute top-0 left-0 bg-primary/10 text-[10px] font-extrabold text-primary px-2 py-1 rounded-br-lg z-10">14% OFF</div>
+<img alt="Onion" class="h-full w-full object-cover mix-blend-multiply dark:mix-blend-normal" data-alt="Fresh red onions in a pile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwGsfbr8cTl5WHS1jHKf2ZWxfYe3aA0ajTdaUpCvPp_T6ouzPTYr8_bXnSHyYLBEh23s_4Acs1No1vK8In5oTfIB3AGEA1MVqzjfbrAJ7UNlH51ovEt7APhrJu7iA3gMNP_dnu3lO4hnDKFrDKBNjF1XLtve3lgsyJty348Bpp03C45dtJGp3W3CHr5esJEWtzVTPIkfeqbCSy6ooZVAKG7wQoeLfB3J_itvmaH7Kl5iCtpYW8L1z6ijFGRDkBv6eBMDSI5CBB99bl"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-[10px] font-bold text-gray-500 bg-[#f2f0f5] dark:bg-gray-800 w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]">timer</span>
+                        8 MINS
+                    </div>
+<h3 class="text-sm md:text-base font-bold text-[#141118] dark:text-white leading-tight line-clamp-2">Fresh Red Onion (Pyaz)</h3>
+<p class="text-xs text-gray-500 font-medium">1 kg</p>
+</div>
+<div class="flex items-end justify-between mt-3">
+<div class="flex flex-col">
+<span class="text-xs text-gray-400 line-through">₹45</span>
+<span class="text-sm md:text-base font-bold text-[#141118] dark:text-white">₹39</span>
+</div>
+<button class="relative overflow-hidden rounded-lg border border-primary bg-white dark:bg-transparent px-5 py-1.5 text-xs md:text-sm font-bold text-primary shadow-sm hover:bg-primary hover:text-white transition-all active:scale-95">
+                        Add
+                    </button>
+</div>
+</div>
+<div class="group flex flex-col justify-between rounded-xl bg-white dark:bg-[#1e1a24] border border-[#f2f0f5] dark:border-gray-800 p-3 hover:shadow-xl hover:border-primary/20 hover:-translate-y-1 transition-all duration-300">
+<div class="relative mb-3 h-32 md:h-40 w-full rounded-lg bg-[#f9f9f9] dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+<div class="absolute top-0 left-0 bg-primary/10 text-[10px] font-extrabold text-primary px-2 py-1 rounded-br-lg z-10">20% OFF</div>
+<img alt="Tomato" class="h-full w-full object-cover mix-blend-multiply dark:mix-blend-normal" data-alt="Fresh red tomatoes on vine" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC523b4jp_Z1ws6I_g50gwh-jUWrGcXdJVhMqOJxMJvTa5G3WvngXM8aziSXGJVR46wNCB-MU0eUdZ7gNBkE80j8L1EeGwJoNX71K86ugya1xSyezadyUIYkpOb-1Yky3mCZ3Pd7CJOx4ZJnpnBJnIJC-0a1weOx3mEGrbaV9_y8nBhnMcnQeh6KTBARBHhg8ysUQdLHjuTS6tv1sNaopwVd3ViKkPebMdGLOX1VSo5cT5rAzXM4J2_oQxn3gxbolT1_oYGsh5JyjY"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-[10px] font-bold text-gray-500 bg-[#f2f0f5] dark:bg-gray-800 w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]">timer</span>
+                        6 MINS
+                    </div>
+<h3 class="text-sm md:text-base font-bold text-[#141118] dark:text-white leading-tight line-clamp-2">Hybrid Tomato (Tamatar)</h3>
+<p class="text-xs text-gray-500 font-medium">500 g</p>
+</div>
+<div class="flex items-end justify-between mt-3">
+<div class="flex flex-col">
+<span class="text-xs text-gray-400 line-through">₹25</span>
+<span class="text-sm md:text-base font-bold text-[#141118] dark:text-white">₹20</span>
+</div>
+<button class="relative overflow-hidden rounded-lg border border-primary bg-white dark:bg-transparent px-5 py-1.5 text-xs md:text-sm font-bold text-primary shadow-sm hover:bg-primary hover:text-white transition-all active:scale-95">
+                        Add
+                    </button>
+</div>
+</div>
+<div class="group flex flex-col justify-between rounded-xl bg-white dark:bg-[#1e1a24] border border-primary p-3 shadow-md hover:shadow-xl transition-all duration-300">
+<div class="relative mb-3 h-32 md:h-40 w-full rounded-lg bg-[#f9f9f9] dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+<img alt="Cabbage" class="h-full w-full object-cover mix-blend-multiply dark:mix-blend-normal" data-alt="Green cabbage head" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7kA6NtjVditRZGQ63cZBFd6uY0rpboOofFAwqDa0PgaGmQ4t4LDtcPZVa2EEP7OmDxMNnvMhuaM-Ox0u6VCZhb6ZUmrI8f1y7VqFMXeZ1D1q5zf2KaHzHi28ua80yYl-LrpSP-gBwNm_T_acub0a5VywTUsf1jGAPufx-hdSBUfey02Hibr2lBu8zi2PQFIPsKlFhNXcQgWphNOJpjXhrDsRqjUXxr1u-y8XzxxyjledrjXHllT9_oJCzZ5xszovoruCOyWQ3AfoZ"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-[10px] font-bold text-gray-500 bg-[#f2f0f5] dark:bg-gray-800 w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]">timer</span>
+                        12 MINS
+                    </div>
+<h3 class="text-sm md:text-base font-bold text-[#141118] dark:text-white leading-tight line-clamp-2">Fresh Cabbage (Patta Gobhi)</h3>
+<p class="text-xs text-gray-500 font-medium">1 pc (approx 600g)</p>
+</div>
+<div class="flex items-end justify-between mt-3">
+<div class="flex flex-col">
+<span class="text-sm md:text-base font-bold text-[#141118] dark:text-white">₹32</span>
+</div>
+<div class="flex items-center rounded-lg bg-primary text-white h-[34px]">
+<button class="px-2.5 h-full hover:bg-black/10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm font-bold">remove</span>
+</button>
+<span class="text-xs font-bold min-w-[20px] text-center">1</span>
+<button class="px-2.5 h-full hover:bg-black/10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm font-bold">add</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col justify-between rounded-xl bg-white dark:bg-[#1e1a24] border border-[#f2f0f5] dark:border-gray-800 p-3 hover:shadow-xl hover:border-primary/20 hover:-translate-y-1 transition-all duration-300">
+<div class="relative mb-3 h-32 md:h-40 w-full rounded-lg bg-[#f9f9f9] dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+<div class="absolute top-0 left-0 bg-primary/10 text-[10px] font-extrabold text-primary px-2 py-1 rounded-br-lg z-10">5% OFF</div>
+<img alt="Broccoli" class="h-full w-full object-cover mix-blend-multiply dark:mix-blend-normal" data-alt="Whole green cauliflower broccoli" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtmO16COWuz5d0nMgL11IEQ52dqUSvMdCJLFZE8mP-DokUMJ3xZIs_mXEbCSTs3W6x1zbaq89FaQtP32mqTb3Yd4rkqwaCDamDh7md_6O8rCETbR0HGPFL1XSMczGwkdTwrzEpddJk-xw--22HtWrIfxmRzMkHO441uPfGsZ9W8NLqrnHdgih8VobASvXbLpV9nddZ5dbhfYXeBYuVOADqYAUQoQfZRiZX7Y33DzK359WzmXpzrQqXQfnCgoCCST-KQ6N45OlmTZJD"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-[10px] font-bold text-gray-500 bg-[#f2f0f5] dark:bg-gray-800 w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]">timer</span>
+                        10 MINS
+                    </div>
+<h3 class="text-sm md:text-base font-bold text-[#141118] dark:text-white leading-tight line-clamp-2">Fresh Broccoli Florets</h3>
+<p class="text-xs text-gray-500 font-medium">250 g</p>
+</div>
+<div class="flex items-end justify-between mt-3">
+<div class="flex flex-col">
+<span class="text-xs text-gray-400 line-through">₹85</span>
+<span class="text-sm md:text-base font-bold text-[#141118] dark:text-white">₹80</span>
+</div>
+<button class="relative overflow-hidden rounded-lg border border-primary bg-white dark:bg-transparent px-5 py-1.5 text-xs md:text-sm font-bold text-primary shadow-sm hover:bg-primary hover:text-white transition-all active:scale-95">
+                        Add
+                    </button>
+</div>
+</div>
+<div class="group flex flex-col justify-between rounded-xl bg-white dark:bg-[#1e1a24] border border-[#f2f0f5] dark:border-gray-800 p-3 hover:shadow-xl hover:border-primary/20 hover:-translate-y-1 transition-all duration-300">
+<div class="relative mb-3 h-32 md:h-40 w-full rounded-lg bg-[#f9f9f9] dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+<img alt="Carrot" class="h-full w-full object-cover mix-blend-multiply dark:mix-blend-normal" data-alt="Orange carrots bunch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsgmZXlb3H-puU_8zk_QHsweYwvhz_ROlwPxhQSDt2A3dxIRWkeGB5MUg7qOiXj_p_4uSNu7j7MBjXFKV8UxyQR_uKVZPaLskoTqISPGsLd5W_vOWKbNFAfgIMKbBsypmGvl2t4wDwN1NMRrIXqcFjY8xRjZdpACSEe9hPoRMazYr05kD9ykGN4sAO22hSDR2_1AabqUXmaAcp_D0DKiwhj_tKOWcXcXNg9ROtd90KjfEfilio0R21lDwRUh9JqfupAb6_Bw7MpFoG"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-[10px] font-bold text-gray-500 bg-[#f2f0f5] dark:bg-gray-800 w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]">timer</span>
+                        15 MINS
+                    </div>
+<h3 class="text-sm md:text-base font-bold text-[#141118] dark:text-white leading-tight line-clamp-2">Orange Carrot (Gajar)</h3>
+<p class="text-xs text-gray-500 font-medium">500 g</p>
+</div>
+<div class="flex items-end justify-between mt-3">
+<div class="flex flex-col">
+<span class="text-sm md:text-base font-bold text-[#141118] dark:text-white">₹45</span>
+</div>
+<button class="relative overflow-hidden rounded-lg border border-primary bg-white dark:bg-transparent px-5 py-1.5 text-xs md:text-sm font-bold text-primary shadow-sm hover:bg-primary hover:text-white transition-all active:scale-95">
+                        Add
+                    </button>
+</div>
+</div>
+<div class="group flex flex-col justify-between rounded-xl bg-white dark:bg-[#1e1a24] border border-[#f2f0f5] dark:border-gray-800 p-3 hover:shadow-xl hover:border-primary/20 hover:-translate-y-1 transition-all duration-300">
+<div class="relative mb-3 h-32 md:h-40 w-full rounded-lg bg-[#f9f9f9] dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+<div class="absolute top-0 left-0 bg-primary/10 text-[10px] font-extrabold text-primary px-2 py-1 rounded-br-lg z-10">10% OFF</div>
+<img alt="Potato" class="h-full w-full object-cover mix-blend-multiply dark:mix-blend-normal" data-alt="Potatoes raw" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOvPGxFPlUSME1wkSBH1KWH5g8QydJ9uY5A9KzMO83hBA5pgqMSV5CmZ09W_BRoNNxe9_G1LHb6LG9foD7PLs_-GpbS1lVSxoaIHHTik4u7_VuNfj7bJmEJXHHrW4-AInjIXOXYNyY93M7ZOQsEtSoN1su36QxByBwXPcM8aRVjxD6EYCPMSBxmTlGR54xpUdfYbtaHUdHb1R3_ER1zKGpQ1HJh3cmElmV5B-bxZRgaw6ec8XQgsEB5xmgqxrgnoWMq8Z404x18Be-"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-[10px] font-bold text-gray-500 bg-[#f2f0f5] dark:bg-gray-800 w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]">timer</span>
+                        8 MINS
+                    </div>
+<h3 class="text-sm md:text-base font-bold text-[#141118] dark:text-white leading-tight line-clamp-2">New Potato (Aloo)</h3>
+<p class="text-xs text-gray-500 font-medium">1 kg</p>
+</div>
+<div class="flex items-end justify-between mt-3">
+<div class="flex flex-col">
+<span class="text-xs text-gray-400 line-through">₹40</span>
+<span class="text-sm md:text-base font-bold text-[#141118] dark:text-white">₹36</span>
+</div>
+<button class="relative overflow-hidden rounded-lg border border-primary bg-white dark:bg-transparent px-5 py-1.5 text-xs md:text-sm font-bold text-primary shadow-sm hover:bg-primary hover:text-white transition-all active:scale-95">
+                        Add
+                    </button>
+</div>
+</div>
+<div class="group flex flex-col justify-between rounded-xl bg-white dark:bg-[#1e1a24] border border-[#f2f0f5] dark:border-gray-800 p-3 hover:shadow-xl hover:border-primary/20 hover:-translate-y-1 transition-all duration-300">
+<div class="relative mb-3 h-32 md:h-40 w-full rounded-lg bg-[#f9f9f9] dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+<img alt="Capsicum" class="h-full w-full object-cover mix-blend-multiply dark:mix-blend-normal" data-alt="Green capsicum bell pepper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj30IbLBgS1Jb4SqjsO3B9auy39YAn9FnwboQLPRZyYHmdHowUL0Jr_DDDRNSZodqv1QE8WTe5SG2SwJMjHVx3rzhzzGlCZyihFh52TNyCyLJZG95VHXuvvO8rjZ0sdB_yCB_8AsbnIpfqpTfco5djydMcj8SeZ-5_dTOY6dcV1iVkCaRsCDmHkzgpl7BpecN7vorm9LqwadOIo4YN1wlz3eYNerHgfw-Pt_34n6LZxmKemZB0MS-VHsmVXoFuml-QnjhjO9TWfZ6c"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-[10px] font-bold text-gray-500 bg-[#f2f0f5] dark:bg-gray-800 w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]">timer</span>
+                        11 MINS
+                    </div>
+<h3 class="text-sm md:text-base font-bold text-[#141118] dark:text-white leading-tight line-clamp-2">Green Capsicum (Shimla Mirch)</h3>
+<p class="text-xs text-gray-500 font-medium">250 g</p>
+</div>
+<div class="flex items-end justify-between mt-3">
+<div class="flex flex-col">
+<span class="text-sm md:text-base font-bold text-[#141118] dark:text-white">₹28</span>
+</div>
+<button class="relative overflow-hidden rounded-lg border border-primary bg-white dark:bg-transparent px-5 py-1.5 text-xs md:text-sm font-bold text-primary shadow-sm hover:bg-primary hover:text-white transition-all active:scale-95">
+                        Add
+                    </button>
+</div>
+</div>
+<div class="group flex flex-col justify-between rounded-xl bg-white dark:bg-[#1e1a24] border border-[#f2f0f5] dark:border-gray-800 p-3 hover:shadow-xl hover:border-primary/20 hover:-translate-y-1 transition-all duration-300">
+<div class="relative mb-3 h-32 md:h-40 w-full rounded-lg bg-[#f9f9f9] dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+<div class="absolute top-0 left-0 bg-gray-500 text-[10px] font-bold text-white px-2 py-1 rounded-br-lg z-10">SOLD OUT</div>
+<img alt="Okra" class="h-full w-full object-cover opacity-50 grayscale mix-blend-multiply dark:mix-blend-normal" data-alt="Lady finger okra green" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWN5u5PPS5f2aabvEHZqYdGiCoGSZd6myZ2KyZ0qdZrI_-oLA2A0qqTUx6uEmgespi01d2EPXbQ9-jJtUcxXodgSo6WtWCzaWhgOQ2JBbG3ANikqME1xye9M6y4hhphQFDWR4cO75W9QwyKXYAZE3-DChHv2bEQX3fMbCs3yh6mPRfg-2hd3p1JfAMe5qsgXPtVue_JOv7l_N0gyZgpaX6PKyCcT4IArx51hriZOEpHjXXRxLk5JRan8eXYc3kaNkYWvec5hLSO70t"/>
+</div>
+<div class="flex flex-col gap-1 opacity-70">
+<div class="flex items-center gap-1 text-[10px] font-bold text-gray-400 bg-[#f2f0f5] dark:bg-gray-800 w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]">timer</span>
+                        NEXT DAY
+                    </div>
+<h3 class="text-sm md:text-base font-bold text-[#141118] dark:text-white leading-tight line-clamp-2">Lady Finger (Bhindi)</h3>
+<p class="text-xs text-gray-500 font-medium">500 g</p>
+</div>
+<div class="flex items-end justify-between mt-3 opacity-70">
+<div class="flex flex-col">
+<span class="text-sm md:text-base font-bold text-[#141118] dark:text-white">₹35</span>
+</div>
+<button class="cursor-not-allowed rounded-lg border border-gray-200 bg-gray-50 px-5 py-1.5 text-xs md:text-sm font-bold text-gray-400" disabled="">
+                        Notify
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed bottom-0 left-0 w-full p-4 bg-white dark:bg-[#1e1a24] border-t border-[#f2f0f5] dark:border-gray-800 lg:hidden shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40">
+<div class="flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="text-xs text-gray-500 uppercase font-bold">1 Item</span>
+<span class="text-lg font-bold text-[#141118] dark:text-white">₹32</span>
+</div>
+<button class="flex-1 h-12 rounded-xl bg-primary text-white font-bold text-base shadow-lg shadow-primary/30 flex items-center justify-center gap-2">
+<span>View Cart</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+
+</body></html>

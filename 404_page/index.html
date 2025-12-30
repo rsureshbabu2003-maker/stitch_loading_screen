@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Page Not Found - Zepto</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7706f9",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#180f23",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit to match theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#141118] dark:text-white flex flex-col min-h-screen overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="w-full bg-white dark:bg-[#1e142b] border-b border-[#f2f0f5] dark:border-[#2a2435]">
+<div class="layout-container flex justify-center w-full">
+<div class="flex w-full max-w-[1200px] items-center justify-between px-6 py-4">
+<!-- Logo & Search Group -->
+<div class="flex items-center gap-8 flex-1">
+<!-- Logo -->
+<a class="flex items-center gap-2 text-[#141118] dark:text-white hover:opacity-80 transition-opacity" href="#">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z"></path>
+</svg>
+</div>
+<h2 class="text-xl font-extrabold leading-tight tracking-tight">Zepto</h2>
+</a>
+<!-- Desktop Search Bar -->
+<label class="hidden md:flex flex-col w-full max-w-[480px] h-11 relative group">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full overflow-hidden border border-transparent focus-within:border-primary/50 transition-colors">
+<div class="text-[#745f8c] flex border-none bg-[#f2f0f5] dark:bg-[#2a2435] items-center justify-center pl-4">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden text-[#141118] dark:text-white focus:outline-0 focus:ring-0 border-none bg-[#f2f0f5] dark:bg-[#2a2435] focus:border-none h-full placeholder:text-[#745f8c] px-4 pl-2 text-sm font-medium leading-normal" placeholder="Search for milk, eggs, bread..." value=""/>
+</div>
+</label>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-6 ml-4">
+<div class="hidden sm:flex items-center gap-6">
+<a class="text-[#141118] dark:text-white text-sm font-bold hover:text-primary transition-colors" href="#">Login</a>
+<a class="text-[#141118] dark:text-white text-sm font-bold hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                            Cart
+                        </a>
+</div>
+<button class="hidden sm:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-5 bg-primary hover:bg-primary/90 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Sign Up</span>
+</button>
+<!-- Mobile Menu Icon -->
+<button class="sm:hidden text-[#141118] dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col items-center justify-center w-full px-4 py-10 md:py-20">
+<!-- 404 Hero Section -->
+<div class="flex flex-col items-center max-w-[600px] w-full gap-8 animate-fade-in">
+<!-- Illustration -->
+<div class="w-full h-64 md:h-80 bg-contain bg-center bg-no-repeat rounded-2xl relative" data-alt="Illustration of a spilled grocery bag with vegetables and fruits scattered on the floor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAPGjfode9HM63OzwEGTzcukc8f-FhKJV3JDd-R1hsKL-v127r-2Marc5SVDBxf4Alwf7r2SRto2KfvpSxKnaxN03LBUmhLVjSTQIreLvhjeAPjUAsxTi4Mxkz27rL5DANXYpPjXuajrDv1WncVRepqHYxmlSicq1GWdsZy5rtVLdHcCqRPj28tAbY8kzkk-wi0U_GGSxdZSZoDV38jw89umLzM27LakXX4QFSaURLE6MHcONPGulb0C2205LFB13KGXOqK7vSOj6Ym");'>
+<!-- Overlay gradient to blend with background if needed, though clean image is preferred -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-background-light dark:to-background-dark opacity-10"></div>
+</div>
+<!-- Text Content -->
+<div class="flex flex-col items-center gap-4 text-center px-4">
+<h1 class="text-primary font-black text-6xl tracking-tighter">404</h1>
+<h2 class="text-[#141118] dark:text-white text-2xl md:text-3xl font-bold leading-tight tracking-tight">
+                    Oops! This shelf is empty.
+                </h2>
+<p class="text-[#745f8c] dark:text-gray-400 text-base font-medium leading-relaxed max-w-[480px]">
+                    We searched every aisle, but we couldn't find the page you're looking for. It might be out of stock, moved, or past its expiration date.
+                </p>
+</div>
+<!-- Primary Action -->
+<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2">
+<button class="flex w-full sm:w-auto min-w-[160px] cursor-pointer items-center justify-center rounded-xl h-12 px-6 bg-primary hover:bg-primary/90 text-white text-base font-bold transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 transform hover:-translate-y-0.5">
+                    Back to Home
+                </button>
+<button class="flex w-full sm:w-auto min-w-[160px] cursor-pointer items-center justify-center rounded-xl h-12 px-6 bg-[#f2f0f5] dark:bg-[#2a2435] hover:bg-[#e6e2eb] dark:hover:bg-[#362f42] text-[#141118] dark:text-white text-base font-bold transition-colors">
+                    Contact Support
+                </button>
+</div>
+</div>
+<!-- Suggestions / Search Recovery -->
+<div class="mt-16 w-full max-w-[800px] flex flex-col items-center border-t border-[#e5e0eb] dark:border-[#2a2435] pt-10">
+<!-- Headline -->
+<h3 class="text-[#141118] dark:text-white tracking-tight text-xl font-bold leading-tight px-4 text-center mb-6">
+                Or try browsing these popular aisles:
+            </h3>
+<!-- Chips Container -->
+<div class="flex flex-wrap justify-center gap-3 px-4">
+<a class="group flex h-10 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-[#2a2435] border border-[#e5e0eb] dark:border-[#3d344d] hover:border-primary dark:hover:border-primary pl-4 pr-5 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-lg text-green-500">eco</span>
+<p class="text-[#141118] dark:text-white text-sm font-bold group-hover:text-primary transition-colors">Fresh Vegetables</p>
+</a>
+<a class="group flex h-10 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-[#2a2435] border border-[#e5e0eb] dark:border-[#3d344d] hover:border-primary dark:hover:border-primary pl-4 pr-5 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-lg text-orange-500">nutrition</span>
+<p class="text-[#141118] dark:text-white text-sm font-bold group-hover:text-primary transition-colors">Fruits</p>
+</a>
+<a class="group flex h-10 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-[#2a2435] border border-[#e5e0eb] dark:border-[#3d344d] hover:border-primary dark:hover:border-primary pl-4 pr-5 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-lg text-blue-400">egg_alt</span>
+<p class="text-[#141118] dark:text-white text-sm font-bold group-hover:text-primary transition-colors">Dairy &amp; Breakfast</p>
+</a>
+<a class="group flex h-10 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-[#2a2435] border border-[#e5e0eb] dark:border-[#3d344d] hover:border-primary dark:hover:border-primary pl-4 pr-5 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-lg text-yellow-500">cookie</span>
+<p class="text-[#141118] dark:text-white text-sm font-bold group-hover:text-primary transition-colors">Snacks &amp; Munchies</p>
+</a>
+<a class="group flex h-10 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-[#2a2435] border border-[#e5e0eb] dark:border-[#3d344d] hover:border-primary dark:hover:border-primary pl-4 pr-5 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-lg text-red-400">local_drink</span>
+<p class="text-[#141118] dark:text-white text-sm font-bold group-hover:text-primary transition-colors">Cold Drinks</p>
+</a>
+</div>
+</div>
+</main>
+<!-- Footer Simple -->
+<footer class="w-full py-6 text-center border-t border-[#f2f0f5] dark:border-[#2a2435] bg-white dark:bg-[#1e142b]">
+<p class="text-[#745f8c] dark:text-gray-500 text-sm font-medium">
+            © 2024 Zepto. All rights reserved. | <a class="hover:text-primary underline" href="#">Help Center</a>
+</p>
+</footer>
+</body></html>
